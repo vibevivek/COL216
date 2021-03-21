@@ -496,6 +496,12 @@ int getFromMem(int m,int sz){
 }
 
 int main(){
+    int r_delay;
+    int c_delay;
+    cout<<"Enter ROW_ACCESS_DELAY: ";
+    cin>>r_delay;
+    cout<<"Enter COL_ACCESS_DELAY: ";
+    cin>>c_delay;
     initializeRegisterMap();
     initializeInsMap();
     register_File[29] = 1048576;
@@ -713,8 +719,8 @@ int main(){
                     row = ((val-INSTR_MEM)/8)/1024;
                     col = ((val-INSTR_MEM)/8)%1024;
                     TOTAL_CYCLE++;
-                    cout<<"cycle "<<TOTAL_CYCLE<<"-"<<TOTAL_CYCLE+11<<": "<<rev_register_map[r]<<"="<<value<<endl;
-                    TOTAL_CYCLE=TOTAL_CYCLE+11;
+                    cout<<"cycle "<<TOTAL_CYCLE<<"-"<<TOTAL_CYCLE+r_delay+c_delay-1<<": "<<rev_register_map[r]<<"="<<value<<endl;
+                    TOTAL_CYCLE=TOTAL_CYCLE+r_delay+1;
                     update++;
                     flag=true;
                 }
@@ -723,16 +729,16 @@ int main(){
                         row = ((val-INSTR_MEM)/8)/1024;
                         col = ((val-INSTR_MEM)/8)%1024;
                         TOTAL_CYCLE++;
-                        cout<<"cycle "<<TOTAL_CYCLE<<"-"<<TOTAL_CYCLE+21<<": "<<rev_register_map[r]<<"= "<<value<<endl;
-                        TOTAL_CYCLE=TOTAL_CYCLE+21;
+                        cout<<"cycle "<<TOTAL_CYCLE<<"-"<<TOTAL_CYCLE+2*r_delay+c_delay-1<<": "<<rev_register_map[r]<<"= "<<value<<endl;
+                        TOTAL_CYCLE=TOTAL_CYCLE+2*r_delay+c_delay-1;
                         update++;
                         update++;
                     }
                     else{
                         col = ((val-INSTR_MEM)/8)%1024;
                         TOTAL_CYCLE++;
-                        cout<<"cycle "<<TOTAL_CYCLE<<"-"<<TOTAL_CYCLE+1<<": "<<rev_register_map[r]<<"= "<<value<<endl;
-                        TOTAL_CYCLE=TOTAL_CYCLE+1;
+                        cout<<"cycle "<<TOTAL_CYCLE<<"-"<<TOTAL_CYCLE+c_delay-1<<": "<<rev_register_map[r]<<"= "<<value<<endl;
+                        TOTAL_CYCLE=TOTAL_CYCLE+c_delay-1;
                     }
                 }
             }
@@ -758,8 +764,8 @@ int main(){
                 row = ((val-INSTR_MEM)/8)/1024;
                 col = ((val-INSTR_MEM)/8)%1024;
                 TOTAL_CYCLE++;
-                cout<<"cycle "<<TOTAL_CYCLE<<"-"<<TOTAL_CYCLE+11<<": memory address "<<(val-INSTR_MEM)/8<<"-"<<((val-INSTR_MEM)/8)+3<<"= "<<register_file(r)<<endl;
-                TOTAL_CYCLE=TOTAL_CYCLE+11;
+                cout<<"cycle "<<TOTAL_CYCLE<<"-"<<TOTAL_CYCLE+r_delay+c_delay-1<<": memory address "<<(val-INSTR_MEM)/8<<"-"<<((val-INSTR_MEM)/8)+3<<"= "<<register_file(r)<<endl;
+                TOTAL_CYCLE=TOTAL_CYCLE+r_delay+c_delay-1;
                 update++;
                 flag=true;
             }
@@ -768,16 +774,16 @@ int main(){
                     row = ((val-INSTR_MEM)/8)/1024;
                     col = ((val-INSTR_MEM)/8)%1024;
                     TOTAL_CYCLE++;
-                    cout<<"cycle "<<TOTAL_CYCLE<<"-"<<TOTAL_CYCLE+21<<": memory address "<<(val-INSTR_MEM)/8<<"-"<<((val-INSTR_MEM)/8)+3<<"= "<<register_file(r)<<endl;
-                    TOTAL_CYCLE=TOTAL_CYCLE+21;
+                    cout<<"cycle "<<TOTAL_CYCLE<<"-"<<TOTAL_CYCLE+2*r_delay+c_delay-1<<": memory address "<<(val-INSTR_MEM)/8<<"-"<<((val-INSTR_MEM)/8)+3<<"= "<<register_file(r)<<endl;
+                    TOTAL_CYCLE=TOTAL_CYCLE+2*r_delay+c_delay-1;
                     update++;
                     update++;
                 }
                 else{
                     col = ((val-INSTR_MEM)/8)%1024;
                     TOTAL_CYCLE++;
-                    cout<<"cycle "<<TOTAL_CYCLE<<"-"<<TOTAL_CYCLE+1<<": memory address "<<(val-INSTR_MEM)/8<<"-"<<((val-INSTR_MEM)/8)+3<<"= "<<register_file(r)<<endl;
-                    TOTAL_CYCLE=TOTAL_CYCLE+1;
+                    cout<<"cycle "<<TOTAL_CYCLE<<"-"<<TOTAL_CYCLE+c_delay-1<<": memory address "<<(val-INSTR_MEM)/8<<"-"<<((val-INSTR_MEM)/8)+3<<"= "<<register_file(r)<<endl;
+                    TOTAL_CYCLE=TOTAL_CYCLE+c_delay-1;
                 }
             }
         }

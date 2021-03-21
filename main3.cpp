@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+
 bool flag = false;
 int row;
 int col;
@@ -498,6 +499,12 @@ int getFromMem(int m,int sz){
 }
 
 int main(){
+    int r_delay;
+    int c_delay;
+    cout<<"Enter ROW_ACCESS_DELAY: ";
+    cin>>r_delay;
+    cout<<"Enter COL_ACCESS_DELAY: ";
+    cin>>c_delay;
     initializeRegisterMap();
     initializeInsMap();
     register_File[29] = 1048576;
@@ -553,6 +560,11 @@ int main(){
         int in = ins_map[cmd];
         string ins = intToBits4(in);
         copyToMem(ins,m);
+        //======
+        if (span<=cycle_count){
+            span=0;
+        }
+        //======
         if(in==0 || in==1 || in==2 || in==5){
             putRegInMem(arg[0],m+4);
             putRegInMem(arg[1],m+9);
@@ -562,7 +574,6 @@ int main(){
                 if (span>cycle_count){
                     cycle_count++;
                     selector.push_back({fixed,checker_flag,cycle_count,span});
-                    //selector.push_back({fixed,checker_flag,span,0});
                 }
                 symbol = "";
                 cycle_count=span;
@@ -586,7 +597,6 @@ int main(){
             if (arg[0]==symbol || arg[1]==symbol){
                 checker_flag=1;
                 if (span>cycle_count){
-                    //selector.push_back({fixed,checker_flag,span,0});
                     cycle_count++;
                     selector.push_back({fixed,checker_flag,cycle_count,span});
                 }
@@ -623,7 +633,8 @@ int main(){
                 if (flag==false){
                     row=v/1024;
                     col=v%1024;
-                    span=13+cycle_count;
+                    //span=13+cycle_count;
+                    span=r_delay+c_delay+1+cycle_count;
                     flag=true;
                     update1++;
                 }
@@ -631,13 +642,15 @@ int main(){
                     if (v/1024 != row){
                         row=v/1024;
                         col=v%1024;
-                        span=23+cycle_count;
+                        //span=23+cycle_count;
+                        span=2*r_delay+c_delay+1+cycle_count;
                         update1++;
                         update1++;
                     }
                     else{
                         col=v%1024;
-                        span=3+cycle_count;
+                        //span=3+cycle_count;
+                        span=c_delay+1+cycle_count;
                     }
                 }
                 cycle_count++;
@@ -654,7 +667,8 @@ int main(){
                 if (flag==false){
                     row=(v)/1024;
                     col=(v)%1024;
-                    span=13+cycle_count;
+                    //span=13+cycle_count;
+                    span=r_delay+c_delay+1+cycle_count;
                     flag=true;
                     update1++;
                 }
@@ -662,13 +676,15 @@ int main(){
                     if (v/1024 != row){
                         row=v/1024;
                         col=v%1024;
-                        span=23+cycle_count;
+                        //span=23+cycle_count;
+                        span=2*r_delay+c_delay+1+cycle_count;
                         update1++;
                         update1++;
                     }
                     else{
                         col=v%1024;
-                        span=3+cycle_count;
+                        //span=3+cycle_count;
+                        span=c_delay+1+cycle_count;
                     }
                 }
                 cycle_count++;
@@ -689,7 +705,8 @@ int main(){
                 if (flag==false){
                     row=v/1024;
                     col=v%1024;
-                    span=13+cycle_count;
+                    //span=13+cycle_count;
+                    span=r_delay+c_delay+1+cycle_count;
                     flag=true;
                     update1++;
                 }
@@ -697,13 +714,15 @@ int main(){
                     if (v/1024 != row){
                         row=v/1024;
                         col=v%1024;
-                        span=23+cycle_count;
+                        //span=23+cycle_count;
+                        span=2*r_delay+c_delay+1+cycle_count;
                         update1++;
                         update1++;
                     }
                     else{
                         col=v%1024;
-                        span=3+cycle_count;
+                        //span=3+cycle_count;
+                        span=c_delay+1+cycle_count;
                     }
                 }
                 cycle_count++;
@@ -720,7 +739,8 @@ int main(){
                 if (flag==false){
                     row=(v)/1024;
                     col=(v)%1024;
-                    span=13+cycle_count;
+                    //span=13+cycle_count;
+                    span=r_delay+c_delay+1+cycle_count;
                     flag=true;
                     update1++;
                 }
@@ -728,13 +748,15 @@ int main(){
                     if (v/1024 != row){
                         row=v/1024;
                         col=v%1024;
-                        span=23+cycle_count;
+                        //span=23+cycle_count;
+                        span=2*r_delay+c_delay+1+cycle_count;
                         update1++;
                         update1++;
                     }
                     else{
                         col=v%1024;
-                        span=3+cycle_count;
+                        //span=3+cycle_count;
+                        span=c_delay+1+cycle_count;
                     }
                 }
                 cycle_count++;
