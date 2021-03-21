@@ -5,6 +5,7 @@ bool flag = false;
 int row;
 int col;
 int update = 0;
+int update1 = 0;
 int total_cyc=0;
 vector<string> rev_register_map = {"$zero","$at","$v0","$v1","$a0","$a1","$a2","$a3","$t0","$t1","$t2","$t3","$t4"
                                     ,"$t5","$t6","$t7","$s0","$s1","$s2","$s3","$s4","$s5","$s6","$s7","$t8","$t9"
@@ -624,12 +625,15 @@ int main(){
                     col=v%1024;
                     span=13+cycle_count;
                     flag=true;
+                    update1++;
                 }
                 else{
                     if (v/1024 != row){
                         row=v/1024;
                         col=v%1024;
                         span=23+cycle_count;
+                        update1++;
+                        update1++;
                     }
                     else{
                         col=v%1024;
@@ -652,12 +656,15 @@ int main(){
                     col=(v)%1024;
                     span=13+cycle_count;
                     flag=true;
+                    update1++;
                 }
                 else{
                     if (v/1024 != row){
                         row=v/1024;
                         col=v%1024;
                         span=23+cycle_count;
+                        update1++;
+                        update1++;
                     }
                     else{
                         col=v%1024;
@@ -684,12 +691,15 @@ int main(){
                     col=v%1024;
                     span=13+cycle_count;
                     flag=true;
+                    update1++;
                 }
                 else{
                     if (v/1024 != row){
                         row=v/1024;
                         col=v%1024;
                         span=23+cycle_count;
+                        update1++;
+                        update1++;
                     }
                     else{
                         col=v%1024;
@@ -712,12 +722,15 @@ int main(){
                     col=(v)%1024;
                     span=13+cycle_count;
                     flag=true;
+                    update1++;
                 }
                 else{
                     if (v/1024 != row){
                         row=v/1024;
                         col=v%1024;
                         span=23+cycle_count;
+                        update1++;
+                        update1++;
                     }
                     else{
                         col=v%1024;
@@ -1019,9 +1032,8 @@ int main(){
 
     }
     cout<<"Total number of cycles: "<<total_cyc<<endl;
-    cout<<"Number of Buffer updates: "<<update<<endl;
-    cout<<INSTR_MEM<<endl;
-    cout<<selector.size()<<endl;
-
+    cout<<"Number of Buffer updates: "<<update1<<endl;
+    cout<<"space taken by in struction: "<<INSTR_MEM<<endl;
+    
     return 0;
 }
